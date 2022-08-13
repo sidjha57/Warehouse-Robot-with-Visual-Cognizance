@@ -1,0 +1,39 @@
+<launch>
+<!--   ebot -->
+    <param name="robot_description" command="$(find xacro)/xacro --inorder '$(find ebot_description)/urdf/ebot_ur5.xacro'"/>
+
+<!--   task6 world -->
+	<include file="$(find ebot_gazebo)/launch/original.launch" />
+
+	<arg name="x" default="0"/>
+	<arg name="y" default="0"/>
+	<arg name="z" default="0"/>
+	<arg name="r" default="0"/>
+	<arg name="p" default="0"/>
+	<arg name="ya" default="0"/>		
+
+<!-- Spawn the Sahyak Bot robot model -->
+	<node name="mybot_spawn" pkg="gazebo_ros" type="spawn_model" output="screen" 
+	    args="-urdf -param robot_description -model ebot -x $(arg x) -y $(arg y) -z $(arg z) -R $(arg r) -P $(arg p) -Y $(arg ya)" />
+
+		
+<!-- include the moveit launch file and node for pick and place using perception-->
+	<include file="$(find pkg_moveit_ebot_ur5)/launch/ebot_ur5_moveit.launch"/>
+	<include file="$(find ebot_combined)/launch/amcl_demo.launch" />
+	<!-- <node name="rviz" pkg="rviz" type="rviz"   args=" -d $(find ebot_combined)/rviz/task5.rviz" /> -->
+	
+	<!-- Move Base Node Init -->
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+    	<rosparam file="$(find ebot_combined)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+	    <rosparam file="$(find ebot_combined)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+	    <rosparam file="$(find ebot_combined)/config/local_costmap_params.yaml" command="load" />
+	    <rosparam file="$(find ebot_combined)/config/global_costmap_params.yaml" command="load" />
+	    <rosparam file="$(find ebot_combined)/config/trajectory_planner.yaml" command="load" />
+	    <param name="move_base/DWAPlannerROS/yaw_goal_tolerance" value="1.0"/>
+	    <param name="move_base/DWAPlannerROS/xy_goal_tolerance" value="1.0"/>
+  	</node>
+
+	<arg name="map_file" default="$(find ebot_combined)/maps/office_world.yaml"/>
+	<node pkg="map_server" type="map_server" name="map_server" args="$(arg map_file)" output="screen"/>
+  
+</launch>

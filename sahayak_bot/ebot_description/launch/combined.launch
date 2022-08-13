@@ -1,0 +1,9 @@
+<launch>
+
+	<node name="reset_text_files" type="reset_text_files.py" pkg="ebot_combined" output="screen"/>
+	<node name="navigate" type="navigate.py" pkg="ebot_combined" output="screen"/>
+	<node name="pick_n_place" type="pick_n_place.py" pkg="ebot_combined" output="screen"/>
+	<node name="object_detect" type="object_detect.py" pkg="ebot_combined" output="screen"/>
+	<node name="pcl" type="pcl" pkg="ebot_combined" output="screen"/>
+
+</launch>

@@ -1,0 +1,36 @@
+item {
+	id: 1
+	name: 'Battery'
+}
+item {
+	id: 2
+	name: 'Coke'
+}
+item {
+	id: 3
+	name: 'Glue'
+}
+item {
+	id: 4
+	name: 'Pair of Wheels Package'
+}
+item {
+	id: 5
+	name: 'eYFI Board'
+}
+item {
+	id: 6
+	name: 'FPGA board'
+}
+item {
+	id: 7
+	name: 'Glass'
+}
+item {
+	id: 8
+	name: 'Adhesive'
+}
+item {
+	id: 9
+	name: 'Dropbox'
+}
