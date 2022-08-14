@@ -1,4 +1,4 @@
-# Warehouse Robot with Visual Cognizance
+# Warehouse Robot With Visual Cognizance
 
 We had to program an Autonomous Ground Vehicle (AGV) to make it capable of autonomously traversing an indoor environment 
 to assist moving objects from one place to another. 
